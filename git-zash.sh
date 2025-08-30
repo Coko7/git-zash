@@ -74,7 +74,11 @@ function restore() {
         return 1
     fi
 
-    for diff_file in "$bak_path"/stash_*.diff; do
+    safe_bak_path=$(mktemp -d -t git-zash-gsb-XXXXXX)
+    mv "$bak_path"/* "$safe_bak_path/"
+    rmdir "$bak_path"
+
+    for diff_file in "$safe_bak_path"/stash_*.diff; do
         echo "📦 Restoring $diff_file as stash@{$i}..."
         git apply "$diff_file"
         if [ $? -ne 0 ]; then
@@ -96,6 +100,8 @@ function restore() {
         git reset --hard
     done
 
+    echo "Removing $safe_bak_path..."
+    rm -rf "$safe_bak_path"
     echo "All diffs applied and stashes recreated."
 }
 
