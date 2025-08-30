@@ -83,6 +83,7 @@ function restore() {
         fi
 
         local stash_message="Restored stash from $(basename "$diff_file")"
+        git add --all
         git stash push -m "$stash_message"
         if [ $? -eq 0 ]; then
             echo "Stash created: $stash_message"
