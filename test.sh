@@ -14,11 +14,11 @@ echo "Hello World" > test1.txt
 echo "Bye World" > test2.txt
 echo "1 + 1 = 2" > maths.txt
 
-git add test1.txt test2.txt maths.txt
+git add --all
 
-git stash push -m "Add test1.txt" -- test1.txt
-git stash push -m "Add test2.txt" -- test2.txt
-git stash push -m "Some maths" -- maths.txt
+git stash push --include-untracked --message "Add test1.txt" -- test1.txt
+git stash push --include-untracked --message "Add test2.txt" -- test2.txt
+git stash push --include-untracked --message "Some maths" -- maths.txt
 
 bash git-zash.sh --backup
 

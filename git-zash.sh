@@ -35,7 +35,6 @@ function backup() {
     local bak_dir="./gsb-$dt"
     mkdir -p "$bak_dir"
 
-  echo "Stash message: ${stash_entry#*: }"
     for ((i=0; i<stash_count; i++)); do
         echo "📦 Backing up stash@{$i}..."
         local bak_path="$bak_dir/stash_${i}.diff"
